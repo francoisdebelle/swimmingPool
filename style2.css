@@ -1,30 +1,86 @@
-body, html{
+body, html {
     margin: 0;
     padding: 0;
     height: 100%;
+    /* CORRECTION 1 : on supprime le centrage global du body.
+       La navbar doit être en haut, le contenu en dessous. */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
+    font-family: Lato, sans-serif;
+    font-weight: 400;
 }
 
-.main-container{
+/* CORRECTION 2 : la navbar est fixed en haut de page,
+   elle ne bouge plus peu importe le scroll. */
+.navbar {
+    display: flex;
+    justify-content: flex-end; /* burger à droite */
+    align-items: center;
+    color: #4e4e4e;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4e4e4e;
+}
+
+/* CORRECTION 3 : le menu déroulant s'ouvre sous la navbar fixe,
+   reste dans le flux visuel et ne chevauche pas le contenu. */
+.nav-links {
+    list-style-type: none;
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    position: absolute;
+    top: 100%; /* juste sous la navbar */
+    left: 0;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 0.75rem 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+}
+
+.nav-links li a {
+    display: block;
+    padding: 0.5rem 1rem;
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.main-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width : 80vw;
-    height: 100%;
+    width: 80vw;
+    /* CORRECTION 4 : margin-top pour compenser la navbar fixed (≈ 60px).
+       Le contenu ne passe plus derrière la navbar. */
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
     flex-direction: column;
     padding: 20px;
     gap: 20px;
-
+    height: 70vw;
 }
 
-.selector-box{
-    border-radius: 20px;
-    width : 100%;
+.selector-box {
     height: 25%;
+    border-radius: 20px;
+    width: 100%;
     padding: 5px;
     padding-left: 15px;
     display: flex;
@@ -32,55 +88,45 @@ body, html{
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     font-family: "Lato", sans-serif;
     font-weight: 900;
-
 }
 
-
-
-.chlore{
-    background: #AA0072;
+.chlore {
     background: linear-gradient(141deg, #AA0072 37%, #eb57b9 100%);
     color: #f4f4f4;
 }
 
-.ph{
-    background: #E27900;
+.ph {
     background: linear-gradient(141deg, #E27900 37%, #F4A54B 100%);
     color: #f4f4f4;
 }
 
-.alcalinite{
-    background: #4a6901;
+.alcalinite {
     background: linear-gradient(141deg, #4a6901 37%, #8EB928 100%);
     color: #f4f4f4;
 }
 
-.indicator{
+.indicator {
     border: 2px solid white;
     border-radius: 50%;
     z-index: 1;
-    height: 100%;
+    height: 120%;
     position: absolute;
-    top: 0;
+    top: -2px;
     bottom: 0;
     left: 0;
     right: 0;
     flex: 1;
     aspect-ratio: 1/1;
-    transition: transform 0.4s cubic-bezier(0.37, 0.85, 0.7, 1.13), 
+    transition: transform 0.4s cubic-bezier(0.37, 0.85, 0.7, 1.13),
                 width 0.3s ease;
 }
 
-.glissiere{
-    /*display: flex;
-    position: relative;
-    justify-content: space-around;
-    align-items: center;*/
+.glissiere {
     position: relative;
     height: 25%;
 }
 
-.value-list{
+.value-list {
     position: relative;
     z-index: 2;
     display: flex;
@@ -93,7 +139,7 @@ body, html{
 }
 
 .value-item {
-    padding: 0 15px; /* Espace autour du texte pour que le cercle ne colle pas aux chiffres */
+    padding: 0 15px;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -103,40 +149,74 @@ body, html{
 }
 
 .my-button {
-  position: relative;
-  overflow: hidden;
-  padding: 12px 24px;
-  color: #4e4e4e;
-  border: 2px solid #4e4e4e;
-  border-radius: 16px;
-  background: transparent;
-  cursor: pointer;
-  z-index: 1; /* Baissé à 1 pour que le pseudo-élément puisse se placer par rapport à lui */
-  font-family: "Lato", sans-serif;
-  font-weight: 900;
-  transition: color 0.4s, transform 0.3s, border-color 0.4s;
+    position: relative;
+    overflow: hidden;
+    padding: 12px 24px;
+    color: #4e4e4e;
+    border: 2px solid #4e4e4e;
+    border-radius: 16px;
+    background: transparent;
+    cursor: pointer;
+    z-index: 1;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    transition: color 0.4s, transform 0.3s, border-color 0.4s;
 }
 
 .my-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(141deg, #0061FF 37%, #60EFFF 100%); /* Ajout du dégradé que tu voulais */
-  transition: left 0.4s ease;
-  z-index: -1; /* Passe derrière le texte */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(141deg, #0061FF 37%, #60EFFF 100%);
+    transition: left 0.4s ease;
+    z-index: -1;
 }
 
-/* Au survol */
 .my-button:hover {
-  color: #f4f4f4;
-  border-color: transparent; /* Au lieu de 'none' pour éviter un saut de pixels */
-  transform: translateY(-1.5px);
+    color: #f4f4f4;
+    border-color: transparent;
+    transform: translateY(-1.5px);
 }
 
-/* L'élément déclencheur manquant */
 .my-button:hover::before {
-  left: 0;
+    left: 0;
+}
+
+/* Style de base du bouton burger */
+.menu-burger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-burger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: left center;
+}
+
+.menu-burger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(0px, 0px);
+}
+
+.menu-burger.open span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.menu-burger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(0px, 0px);
 }
