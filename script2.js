@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const values = [];
             allSelectors.forEach(container => {
                 const activeItem = container.querySelector('.value-item.active');
-                values.push(activeItem ? activeItem.innerText : "");
+                values.push(activeItem ? activeItem.getAttribute('data-value') : "");
             });
 
             const payload = {
