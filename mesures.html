@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Données de la Piscine</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; max-width: 800px; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .loading { font-style: italic; color: gray; }
+    </style>
+</head>
+<body>
+
+    <h2>Suivi des analyses de l'eau</h2>
+    <div id="loading" class="loading">Chargement des données...</div>
+    
+    <table id="tableau-donnees" style="display:none;">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Chlore</th>
+                <th>pH</th>
+                <th>Alcalinité</th>
+            </tr>
+        </thead>
+        <tbody id="corps-tableau">
+            </tbody>
+    </table>
+
+    <script>
+        // Remplacer par l'URL obtenue lors du déploiement de l'Apps Script
+        const urlAppScript = "https://script.google.com/macros/s/AKfycbwZe1MwJHrJN8QwHzaMsTQVEnyddu5sKQwthEFrw-p1d_p9DI1Wajk8Ci_sAdQfGPbR/exec";
+
+        async function chargerDonnees() {
+            try {
+                // Appel de l'API Apps Script
+                const response = await fetch(urlAppScript);
+                const donnees = await response.json();
+                
+                const corpsTableau = document.getElementById('corps-tableau');
+                
+                // Construire les lignes du tableau HTML
+                donnees.forEach(ligne => {
+                    const tr = document.createElement('tr');
+                    
+                    // Gérer les cases potentiellement vides (ex: Chlore vide à la ligne 2)
+                    const chlore = ligne.chlore !== "" ? ligne.chlore : "-";
+                    const ph = ligne.ph !== "" ? ligne.ph : "-";
+                    const alcalinite = ligne.alcalinite !== "" ? ligne.alcalinite : "-";
+
+                    tr.innerHTML = `
+                        <td>${ligne.date}</td>
+                        <td>${chlore}</td>
+                        <td>${ph}</td>
+                        <td>${alcalinite}</td>
+                    `;
+                    corpsTableau.appendChild(tr);
+                });
+
+                // Masquer le message de chargement et afficher le tableau
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('tableau-donnees').style.display = 'table';
+
+            } catch (error) {
+                console.error("Erreur lors du chargement :", error);
+                document.getElementById('loading').innerText = "Erreur de chargement des données.";
+            }
+        }
+
+        // Lancer le chargement au chargement de la page
+        window.onload = chargerDonnees;
+    </script>
+</body>
+</html>
