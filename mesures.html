@@ -2,15 +2,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Données de la Piscine</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { border-collapse: collapse; width: 100%; max-width: 800px; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        .loading { font-style: italic; color: gray; }
-    </style>
+    <title>Carnet de mesure</title>
+    <link rel="stylesheet" href="style_mesures.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -20,10 +16,10 @@
     <table id="tableau-donnees" style="display:none;">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Chlore</th>
+                <th>DATE & HEURE</th>
+                <th>CHLORE</th>
                 <th>pH</th>
-                <th>Alcalinité</th>
+                <th>ALCALINITE</th>
             </tr>
         </thead>
         <tbody id="corps-tableau">
