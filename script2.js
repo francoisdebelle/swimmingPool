@@ -1,3 +1,12 @@
+
+  // On vérifie si le navigateur du GSM supporte les Service Workers
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(() => console.log('Service Worker enregistré avec succès !'))
+      .catch((err) => console.log('Échec de l\'enregistrement :', err));
+  }
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- CONFIGURATION GOOGLE SHEETS ---
     // Remplace l'URL ci-dessous par l'URL que tu as obtenue lors du déploiement App Script
