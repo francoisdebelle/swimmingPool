@@ -1,83 +1,85 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sélecteur de valeurs</title>
-        <link rel="stylesheet" href="style2.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/png" href="favicon-96x96.png?v=2" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2" />
-        <link rel="shortcut icon" href="favicon.ico?v=2" />
-        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2" />
-        <meta name="apple-mobile-web-app-title" content="Piscine" />
-        <link rel="manifest" href="site.webmanifest?v=2" />
-    </head>
-    <body>
-        <nav class="navbar">
-            <button class="menu-burger" id="burger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#">Prendre une mesure</a></li>
-                <li><a href="mesures.html">Carnet de mesures</a></li>
-            </ul>
-        </nav>
-        
-        <div class="main-container">
-            <div class="selector-box chlore">
-                <p>Chlore</p>
-                <div class="glissiere">
-                    <div class="indicator"></div>
-                    <ul class="value-list">
-                        <li class="value-item active" data-value="0" data-color="linear-gradient(141deg, #FFED9C 37%, #FFF7D3 100%)" cltxt="#4e4e4e">0</li>
-                        <li class="value-item 0.5" data-value="0.5" data-color="linear-gradient(141deg, #FFD6C0 37%, #FFEDE4 100%)" cltxt="#4e4e4e">0.5</li>
-                        <li class="value-item 1" data-value="1" data-color="linear-gradient(141deg, #EDC2CA 37%, #F8EDEF 100%)" cltxt="#4e4e4e">1</li>
-                        <li class="value-item 3" data-value="3" data-color="linear-gradient(141deg, #D3A5C4 37%, #EAD0E1 100%)" cltxt="#f4f4f4">3</li>
-                        <li class="value-item 5" data-value="5" data-color="linear-gradient(141deg, #BB629E 37%, #DE97C6 100%)" cltxt="#f4f4f4">5</li>
-                        <li class="value-item 10" data-value="10" data-color="linear-gradient(141deg, #AA0072 37%, #eb57b9 100%)" cltxt="#f4f4f4">10</li>
-                    </ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Piscine</title>
+    <link rel="stylesheet" href="style_acceuil.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/tabler-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="entete">
+        <div class="logo-row">
+            <div class="logo-box"><i class="ti ti-pool"></i></div>
+            <p>Ma piscine</p>
+        </div>
+        <div class="meteo"><p>Meteo</p></div>
+    </div>
+    <div class="huge-icon"><i class="ti ti-pool badge"></i></div>
+    <div class="state-report">
+        <span class="hero-title">Tout va bien !</span>
+        <span class="hero-text">Dernière mesure · aujourd'hui à 09 h 42</span>
+        <div class="hero-span"></div>
+        <div class="hero-arc"></div>    
+    </div>
+    <div class="corps">
+        <div class="cards">
+            <div class="carte">
+                <div class="titre">Chlore</div>
+                <div class="mesure">1,0</div>
+                <div class="unité">mg/L</div>
+            </div>
+            <div class="carte">
+                <div class="titre">pH</div>
+                <div class="mesure">7,2</div>
+                <div class="unité">mg/L</div>
+            </div>
+            <div class="carte">
+                <div class="titre">Alcalinité</div>
+                <div class="mesure">4,0</div>
+                <div class="unité">mg/L</div>
+            </div>
+        </div>
+        <div>
+            <h2>RECOMMENDATION</h2>
+            <div class="alert-card">
+                <div class="logo-box" style="background-color: #fde9b8;"><i class="ti ti-flask" style="color:#c07800; font-size: 19px;"></i></div>
+                <div>
+                <div class="alert-title">pH trop élevé</div>
+                <div class="alert-text">Ajouter ce que vous voulez. De tout de façon ça ne changera rien</div>
                 </div>
             </div>
-
-            <div class="selector-box ph">
-                <p>pH</p>
-                <div class="glissiere">
-                    <div class="indicator"></div>
-                    <ul class="value-list">
-                        <li class="value-item active" data-value="6,2" data-color="linear-gradient(141deg, #FDBD2A 37%, #FFD470 100%)">6.2</li>
-                        <li class="value-item" data-value="6,8" data-color="linear-gradient(141deg, #FF9A3C 37%, #FFB672 100%)">6.8</li>
-                        <li class="value-item" data-value="7,2" data-color="linear-gradient(141deg, #E27900 37%, #F4A54B 100%)">7.2</li>
-                        <li class="value-item" data-value="7,8" data-color="linear-gradient(141deg, #FF463C 37%, #FF655D 100%)">7.8</li>
-                        <li class="value-item" data-value="8,4" data-color="linear-gradient(141deg, #FF3C60 37%, #FF879D 100%)">8.4</li>
-                    </ul>
-                </div>    
+        </div>
+        <div>
+            <h2>ACTIONS RAPIDES</h2>
+            <div class="line-cards">
+                <a href="index.html" class="lien-carte">
+                    <div class="carte1">
+                        <i class="ti ti-plus icone"></i>
+                        <div class="action-text">Prendre une <br> mesure</div>
+                    </div>
+                </a>
+                <a href="mesures.html" class="lien-carte">
+                    <div class="carte1">
+                        <i class="ti ti-notebook icone"></i>
+                        <div class="action-text">Carnet de<br> mesure</div>
+                    </div>
+                </a>
+                <a href="index.html" class="lien-carte">
+                    <div class="carte1">
+                        <i class="ti ti-report-analytics icone"></i>
+                        <div class="action-text">Mesure <br>avancée</div>
+                    </div>
+                </a>
             </div>
-
-            <div class="selector-box alcalinite">
-                <p>Alcalinité</p>
-                <div class="glissiere">
-                    <div class="indicator"></div>
-                    <ul class="value-list">
-                        <li class="value-item active" data-value="0" data-color="linear-gradient(141deg, #FDBD2A 37%, #FFD470 100%)">0</li>
-                        <li class="value-item" data-value="40" data-color="linear-gradient(141deg, #D6C758 37%, #F4E780 100%)">40</li>
-                        <li class="value-item" data-value="80" data-color="linear-gradient(141deg, #ADC34A 37%, #C8DD6E 100%)">80</li>
-                        <li class="value-item" data-value="120" data-color="linear-gradient(141deg, #93A73D 37%, #B7C86A 100%)">120</li>
-                        <li class="value-item" data-value="180" data-color="linear-gradient(141deg, #4F8A2A 37%, #81C557 100%)">180</li>
-                        <li class="value-item" data-value="240" data-color="linear-gradient(141deg, #387427 37%, #6BB257 100%)">240</li>
-                    </ul>
-                </div>    
-            </div>
-
-            <button class="my-button">Enregistrer</button>
-            
-        </div> 
-        
-         <script src="script2.js"></script>
-    </body>
+        </div>
+    </div>
+    
+</body>
 </html>
