@@ -4,6 +4,17 @@ body, html {
     font-weight: 400;
     display: flex;
     flex-direction: column;
+    font-size: 16px;
+}
+
+@media (max-width: 768px){
+    table{
+        width: 95 vw;
+        font-size: 0.9rem;
+    }
+    th, td{
+        padding: 7px 5px;
+    }
 }
 
 table{
