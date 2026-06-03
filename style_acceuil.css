@@ -232,3 +232,12 @@ h2{
     color: inherit;        
     display: block;
 }
+
+@media (max-width: 480px) {
+    .cards,
+    .line-cards,
+    .alert-card {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+}
