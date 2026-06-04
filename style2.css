@@ -15,18 +15,18 @@ body, html {
    elle ne bouge plus peu importe le scroll. */
 .navbar {
     display: flex;
-    justify-content: flex-end; /* burger à droite */
+    justify-content: space-between; /* burger à droite */
     align-items: center;
-    color: #4e4e4e;
-    padding: 1rem;
+    color: #fff;
+    padding: 0.5rem;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     box-sizing: border-box;
-    background-color: #f4f4f4;
     z-index: 100;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    /*box-shadow: 0 2px 6px rgba(0,0,0,0.08);*/
+    background-color: #2979f2;
 }
 
 .nav-links a {
@@ -215,7 +215,7 @@ body, html {
     display: block;
     width: 100%;
     height: 3px;
-    background-color: #333;
+    background-color: #fff;
     border-radius: 2px;
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: left center;
@@ -232,4 +232,24 @@ body, html {
 
 .menu-burger.open span:nth-child(3) {
     transform: rotate(-45deg) translate(0px, 0px);
+}
+
+.logo-box {
+    color: #fff;
+    margin: 17px; 
+    font-size: 17px;
+    width : 40px;
+    height: 32px;
+    border-radius: 9px;
+    background: rgba(255,255,255,0.2);
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-row{
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-weight: 500;
 }
