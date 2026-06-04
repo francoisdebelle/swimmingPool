@@ -24,7 +24,7 @@
     <div class="huge-icon"><i class="ti ti-pool badge"></i></div>
     <div class="state-report">
         <span class="hero-title">Tout va bien !</span>
-        <span class="hero-text">Dernière mesure · aujourd'hui à 09 h 42</span>
+        <span class="hero-text" id="date-mesure">Chargement ...</span>
         <div class="hero-span"></div>
         <div class="hero-arc"></div>    
     </div>
@@ -32,17 +32,17 @@
         <div class="cards">
             <div class="carte">
                 <div class="titre">Chlore</div>
-                <div class="mesure">1,0</div>
+                <div class="mesure" id="chlore-value">--</div>
                 <div class="unité">mg/L</div>
             </div>
             <div class="carte">
                 <div class="titre">pH</div>
-                <div class="mesure">7,2</div>
+                <div class="mesure" id="ph-value">--</div>
                 <div class="unité">mg/L</div>
             </div>
             <div class="carte">
                 <div class="titre">Alcalinité</div>
-                <div class="mesure">4,0</div>
+                <div class="mesure" id="alcalinite-value">--</div>
                 <div class="unité">mg/L</div>
             </div>
         </div>
@@ -80,6 +80,63 @@
             </div>
         </div>
     </div>
-    
+<script>
+    async function chargerDerniereMesure() {
+
+    const url = "https://script.google.com/macros/s/AKfycbzjf-IBRqf-Kt6YNoonyonIXVvGPEW2RyVkeaqbS65WnJKbfP9zXTMUEgha96B-QVVc/exec";
+
+    try {
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (!data || data.length === 0) {
+            console.log("Aucune donnée");
+            return;
+        }
+
+        // Dernière ligne du Google Sheet
+        const derniereMesure = data[data.length - 1];
+
+        document.getElementById("chlore-value").textContent =
+            derniereMesure.chlore || "--";
+
+        document.getElementById("ph-value").textContent =
+            derniereMesure.ph || "--";
+
+        document.getElementById("alcalinite-value").textContent =
+            derniereMesure.alcalinite || "--";
+
+        const [jour, mois, annee] = derniereMesure.date.split(" ")[0].split("/");
+const dateMesure = new Date(annee, mois - 1, jour);
+
+const aujourdHui = new Date();
+
+let texteDate;
+
+if (
+    dateMesure.getDate() === aujourdHui.getDate() &&
+    dateMesure.getMonth() === aujourdHui.getMonth() &&
+    dateMesure.getFullYear() === aujourdHui.getFullYear()
+) {
+    texteDate = "Aujourd'hui";
+} else {
+    texteDate = dateMesure.toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+}
+
+document.getElementById("date-mesure").textContent =
+    "Dernière mesure · " + texteDate;
+
+    } catch (error) {
+        console.error("Erreur :", error);
+    }
+}
+
+chargerDerniereMesure();
+</script>    
 </body>
 </html>

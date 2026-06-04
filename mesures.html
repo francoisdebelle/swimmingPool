@@ -17,6 +17,7 @@
     <table id="tableau-donnees" style="display:none;">
         <thead>
             <tr>
+                <th></th>
                 <th>DATE & HEURE</th>
                 <th>CHLORE</th>
                 <th>pH</th>
@@ -29,7 +30,8 @@
 
     <script>
         // Remplacer par l'URL obtenue lors du déploiement de l'Apps Script
-        const urlAppScript = "https://script.google.com/macros/s/AKfycbwZe1MwJHrJN8QwHzaMsTQVEnyddu5sKQwthEFrw-p1d_p9DI1Wajk8Ci_sAdQfGPbR/exec";
+        const urlAppScript = "https://script.google.com/macros/s/AKfycbzjf-IBRqf-Kt6YNoonyonIXVvGPEW2RyVkeaqbS65WnJKbfP9zXTMUEgha96B-QVVc/exec";
+
 
         async function chargerDonnees() {
             try {
@@ -49,12 +51,19 @@
                     const alcalinite = ligne.alcalinite !== "" ? ligne.alcalinite : "-";
 
                     tr.innerHTML = `
-                        <td>${ligne.date}</td>
-                        <td>${chlore}</td>
-                        <td>${ph}</td>
-                        <td>${alcalinite}</td>
-                    `;
-                    corpsTableau.appendChild(tr);
+    <td>
+        <button
+            class="delete-btn"
+            onclick="supprimerMesure(${ligne.rowId})">
+            ✕
+        </button>
+    </td>
+    <td>${ligne.date}</td>
+    <td>${chlore}</td>
+    <td>${ph}</td>
+    <td>${alcalinite}</td>
+`;
+corpsTableau.appendChild(tr);
                 });
 
                 // Masquer le message de chargement et afficher le tableau
@@ -66,6 +75,42 @@
                 document.getElementById('loading').innerText = "Erreur de chargement des données.";
             }
         }
+
+        async function supprimerMesure(rowId) {
+
+    const confirmation = confirm(
+        "Voulez-vous supprimer cette mesure ?"
+    );
+
+    if (!confirmation) return;
+
+    try {
+
+        const response = await fetch(urlAppScript, {
+            method: "POST",
+            body: JSON.stringify({
+                action: "delete",
+                rowId: rowId
+            })
+        });
+
+        const resultat = await response.json();
+
+        if (resultat.result === "success") {
+
+            location.reload();
+
+        } else {
+
+            alert("Erreur de suppression");
+        }
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Erreur réseau");
+    }
+}
 
         // Lancer le chargement au chargement de la page
         window.onload = chargerDonnees;
