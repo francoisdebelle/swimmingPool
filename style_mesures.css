@@ -50,17 +50,17 @@ h2{
 }
 
 .delete-btn{
-    width:30px;
-    height:30px;
     border:none;
-    border-radius:50%;
-    background:#ff4d4d;
-    color:white;
+    background-color: #ffffff;
+    color:#ff4d4d;
     cursor:pointer;
-    font-size:16px;
+    font-size:18px;
     font-weight:bold;
 }
 
 .delete-btn:hover{
     transform:scale(1.1);
 }
+
+.delete-btn { display: none; }
+tr.selectionnee .delete-btn { display: inline; }

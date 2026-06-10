@@ -106,6 +106,7 @@ body, html {
 .chlore {
     background: linear-gradient(141deg, #AA0072 37%, #eb57b9 100%);
     color: #f4f4f4;
+    margin-top: 20px;
 }
 
 .ph {
