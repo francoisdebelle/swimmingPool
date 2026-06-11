@@ -9,8 +9,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/tabler-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <nav class="navbar">
+            <div class="logo-row">
+                <div class="logo-box"><i class="ti ti-notebook"></i></div>
+                <p>Prendre une mesure</p>
+            </div>
+            <button class="menu-burger" id="burger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#">Prendre une mesure</a></li>
+                <li><a href="mesures.html">Carnet de mesures</a></li>
+                <li><a href="index.html">Acceuil</a></li>
+            </ul>
+        </nav>
 
     <h2>Suivi des analyses de l'eau</h2>
     <div id="loading" class="loading">Chargement des données...</div>
@@ -132,6 +150,13 @@ corpsTableau.appendChild(tr);
 
         // Lancer le chargement au chargement de la page
         window.onload = chargerDonnees;
+        const burger = document.getElementById('burger-menu');
+const navLinks = document.getElementById('nav-links');
+
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  navLinks.classList.toggle('active');
+});
     </script>
 </body>
 </html>

@@ -11,6 +11,8 @@ body, html {
     font-weight: 400;
 }
 
+
+
 /* CORRECTION 2 : la navbar est fixed en haut de page,
    elle ne bouge plus peu importe le scroll. */
 .navbar {
