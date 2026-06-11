@@ -1,5 +1,5 @@
 // ⚠️ Incrementer ce numéro à CHAQUE mise à jour de votre site
-const CACHE_NAME = 'mon-app-cache-v2';
+const CACHE_NAME = 'mon-app-cache-v3';
 const ASSETS = [
   '/',
   '/index.html',
