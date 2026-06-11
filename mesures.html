@@ -93,20 +93,24 @@ corpsTableau.appendChild(tr);
             }
         
                 // Ajouter un écouteur de clic sur chaque ligne
-        document.querySelectorAll('#corps-tableau tr').forEach(tr => {
-        tr.addEventListener('click', function(e) {
-        // Ne pas déclencher si on clique directement sur le bouton supprimer
+document.querySelectorAll('#corps-tableau tr').forEach(tr => {
+    tr.addEventListener('click', function(e) {
         if (e.target.closest('.delete-btn')) return;
-        
-        // Retirer la sélection sur toutes les autres lignes
         document.querySelectorAll('#corps-tableau tr').forEach(autreTr => {
             autreTr.classList.remove('selectionnee');
         });
-        
-        // Ajouter la sélection sur la ligne cliquée
-        this.classList.toggle('selectionnee');
+        this.classList.add('selectionnee'); // add au lieu de toggle
     });
-});}
+});
+
+// Désélectionner si clic en dehors du tableau
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('#tableau-donnees')) {
+        document.querySelectorAll('#corps-tableau tr').forEach(tr => {
+            tr.classList.remove('selectionnee');
+        });
+    }
+});;}
 
 
 
