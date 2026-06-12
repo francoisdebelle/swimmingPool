@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +8,39 @@
     <link rel="stylesheet" href="style_acceuil.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/tabler-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon-96x96.png?v=2" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2" />
+    <link rel="shortcut icon" href="favicon.ico?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2" />
+    <meta name="apple-mobile-web-app-title" content="Piscine" />
+    <link rel="manifest" href="site.webmanifest?v=2" />
 </head>
+
 <body>
     <div class="entete">
         <div class="logo-row">
             <div class="logo-box"><i class="ti ti-pool"></i></div>
             <p>Ma piscine</p>
         </div>
-        <div class="meteo"><p>Meteo</p></div>
+        <div class="meteo">
+            <p>Meteo</p>
+        </div>
     </div>
     <div class="huge-icon"><i class="ti ti-pool badge"></i></div>
     <div class="state-report">
         <span class="hero-title">Tout va bien !</span>
         <span class="hero-text" id="date-mesure">Chargement ...</span>
         <div class="hero-span"></div>
-        <div class="hero-arc"></div>    
+        <div class="hero-arc"></div>
     </div>
     <div class="corps">
         <div class="cards">
@@ -49,10 +63,11 @@
         <div>
             <h2>RECOMMENDATION</h2>
             <div class="alert-card">
-                <div class="logo-box" style="background-color: #fde9b8;"><i class="ti ti-flask" style="color:#c07800; font-size: 19px;"></i></div>
-                <div>
-                <div class="alert-title">pH trop élevé</div>
-                <div class="alert-text">Ajouter ce que vous voulez. De tout de façon ça ne changera rien</div>
+                <div class="logo-box" style="background-color: #fde9b8;"><i class="ti ti-flask"
+                        style="color:#c07800; font-size: 19px;"></i></div>
+                <div id="alert-box">
+                    <div class="alert-title" id="alert-title">pH trop élevé</div>
+                    <div class="alert-text">Ajouter ce que vous voulez. De tout de façon ça ne changera rien</div>
                 </div>
             </div>
         </div>
@@ -80,63 +95,80 @@
             </div>
         </div>
     </div>
-<script>
-    async function chargerDerniereMesure() {
+    <script>
+        
+        function AjouterAlerte (titre){
+            const blocAlert = `<div class="alert-title">${titre}</div>`
+            document.getElementById("alert-box").insertAdjacentHTML('beforeend', blocAlert);
 
-    const url = "https://script.google.com/macros/s/AKfycbzjf-IBRqf-Kt6YNoonyonIXVvGPEW2RyVkeaqbS65WnJKbfP9zXTMUEgha96B-QVVc/exec";
+        }
+        
+        async function chargerDerniereMesure() {
 
-    try {
+            const url = "https://script.google.com/macros/s/AKfycbzjf-IBRqf-Kt6YNoonyonIXVvGPEW2RyVkeaqbS65WnJKbfP9zXTMUEgha96B-QVVc/exec";
 
-        const response = await fetch(url);
-        const data = await response.json();
+            try {
 
-        if (!data || data.length === 0) {
-            console.log("Aucune donnée");
-            return;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (!data || data.length === 0) {
+                    console.log("Aucune donnée");
+                    return;
+                }
+
+                const derniereMesure = data[data.length - 1];
+
+                document.getElementById("chlore-value").textContent =
+                    derniereMesure.chlore || "--";
+
+                document.getElementById("ph-value").textContent =
+                    derniereMesure.ph || "--";
+
+                document.getElementById("alcalinite-value").textContent =
+                    derniereMesure.alcalinite || "--";
+
+                const [jour, mois, annee] = derniereMesure.date.split(" ")[0].split("/");
+                const dateMesure = new Date(annee, mois - 1, jour);
+
+                const aujourdHui = new Date();
+
+                let texteDate;
+
+                if (
+                    dateMesure.getDate() === aujourdHui.getDate() &&
+                    dateMesure.getMonth() === aujourdHui.getMonth() &&
+                    dateMesure.getFullYear() === aujourdHui.getFullYear()
+                ) {
+                    texteDate = "Aujourd'hui";
+                } else {
+                    texteDate = dateMesure.toLocaleDateString("fr-FR", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
+                    });
+                }
+
+                document.getElementById("date-mesure").textContent =
+                    "Dernière mesure · " + texteDate;
+
+                if (
+                    derniereMesure.chlore == 0.5){
+                        document.getElementById("alert-title").textContent = "Le chlore est un peu trop bas !";
+                    }
+
+                if (derniereMesure.ph == 7,2){
+                    AjouterAlerte("Le ph est bon :-)");
+                }
+                
+
+            } catch (error) {
+                console.error("Erreur :", error);
+            }
         }
 
-        // Dernière ligne du Google Sheet
-        const derniereMesure = data[data.length - 1];
-
-        document.getElementById("chlore-value").textContent =
-            derniereMesure.chlore || "--";
-
-        document.getElementById("ph-value").textContent =
-            derniereMesure.ph || "--";
-
-        document.getElementById("alcalinite-value").textContent =
-            derniereMesure.alcalinite || "--";
-
-        const [jour, mois, annee] = derniereMesure.date.split(" ")[0].split("/");
-const dateMesure = new Date(annee, mois - 1, jour);
-
-const aujourdHui = new Date();
-
-let texteDate;
-
-if (
-    dateMesure.getDate() === aujourdHui.getDate() &&
-    dateMesure.getMonth() === aujourdHui.getMonth() &&
-    dateMesure.getFullYear() === aujourdHui.getFullYear()
-) {
-    texteDate = "Aujourd'hui";
-} else {
-    texteDate = dateMesure.toLocaleDateString("fr-FR", {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-    });
-}
-
-document.getElementById("date-mesure").textContent =
-    "Dernière mesure · " + texteDate;
-
-    } catch (error) {
-        console.error("Erreur :", error);
-    }
-}
-
-chargerDerniereMesure();
-</script>    
+        chargerDerniereMesure();
+    </script>
 </body>
+
 </html>
