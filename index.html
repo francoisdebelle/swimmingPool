@@ -66,8 +66,8 @@
                 <div class="logo-box" style="background-color: #fde9b8;"><i class="ti ti-flask"
                         style="color:#c07800; font-size: 19px;"></i></div>
                 <div id="alert-box">
-                    <div class="alert-title" id="alert-title">pH trop élevé</div>
-                    <div class="alert-text">Ajouter ce que vous voulez. De tout de façon ça ne changera rien</div>
+                    <div class="alert-title" id="alert-title" style="display: none;">pH trop élevé</div>
+                    <div class="alert-text" style="display: none;">Ajouter ce que vous voulez. De tout de façon ça ne changera rien</div>
                 </div>
             </div>
         </div>
@@ -99,6 +99,12 @@
         
         function AjouterAlerte (titre){
             const blocAlert = `<div class="alert-title">${titre}</div>`
+            document.getElementById("alert-box").insertAdjacentHTML('beforeend', blocAlert);
+
+        }
+
+        function AjouterTextAlerte (text){
+            const blocAlert = `<div class="alert-text">${text}</div>`
             document.getElementById("alert-box").insertAdjacentHTML('beforeend', blocAlert);
 
         }
@@ -152,13 +158,48 @@
                 document.getElementById("date-mesure").textContent =
                     "Dernière mesure · " + texteDate;
 
-                if (
-                    derniereMesure.chlore == 0.5){
-                        document.getElementById("alert-title").textContent = "Le chlore est un peu trop bas !";
-                    }
+                switch (derniereMesure.chlore){
+                    case '0': 
+                        AjouterAlerte("Le niveau de chlore est trop bas.");
+                        AjouterTextAlerte("Rajouter 100 grammes de chlore solide.");
+                        break;
+                    case '0.5': 
+                        AjouterAlerte("Le niveau de chlore est trop bas.");
+                        AjouterTextAlerte("Rajouter 20 grammes de chlore solide.");
+                        break;
+                    case '3': 
+                        AjouterAlerte("Le niveau de chlore est trop haut.");
+                        AjouterTextAlerte("Il faut attendre que le niveau de chlore descende naturelement.");
+                        break;
+                    case '5': 
+                        AjouterAlerte("Le niveau de chlore est trop haut.");
+                        AjouterTextAlerte("Il faut attendre que le niveau de chlore descende naturelement.");
+                        break;
+                    case '10': 
+                        AjouterAlerte("Le niveau de chlore est trop haut.");
+                        AjouterTextAlerte("Il faut attendre que le niveau de chlore descende naturelement.");
+                        break;
+                    
+                }
 
-                if (derniereMesure.ph == 7,2){
-                    AjouterAlerte("Le ph est bon :-)");
+                switch (derniereMesure.ph){
+                    case '6,2': 
+                        AjouterAlerte("Le pH de l'eau est trop bas.");
+                        AjouterTextAlerte("Ajouter 720 mL de pH Maxi.");
+                        break;
+                    case '6,8': 
+                        AjouterAlerte("Le pH de l'eau est trop bas.");
+                        AjouterTextAlerte("Ajouter 240 mL de pH Maxi.");
+                        break;
+                    case '7,8': 
+                        AjouterAlerte("Le pH de l'eau est trop haut.");
+                        AjouterTextAlerte("Ajouter 300 grammes de pH Mini.");
+                        break;
+                    case '8,4': 
+                        AjouterAlerte("Le pH de l'eau est trop haut.");
+                        AjouterTextAlerte("Ajouter 1,8 kilo de pH Mini.");
+                        break;
+                    
                 }
                 
 

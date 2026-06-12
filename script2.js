@@ -1,10 +1,10 @@
 
-  // On vérifie si le navigateur du GSM supporte les Service Workers
-  if ('serviceWorker' in navigator) {
+// On vérifie si le navigateur du GSM supporte les Service Workers
+if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')
-      .then(() => console.log('Service Worker enregistré avec succès !'))
-      .catch((err) => console.log('Échec de l\'enregistrement :', err));
-  }
+        .then(() => console.log('Service Worker enregistré avec succès !'))
+        .catch((err) => console.log('Échec de l\'enregistrement :', err));
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,25 +16,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateIndicator(activeItem, container) {
         const indicator = container.querySelector('.indicator');
-        
+
         const x = activeItem.offsetLeft;
         const itemWidth = activeItem.offsetWidth;
         const indicatorWidth = indicator.offsetWidth;
-        const deplacement = x + itemWidth/2 - indicatorWidth/2;
+        const deplacement = x + itemWidth / 2 - indicatorWidth / 2;
 
         indicator.style.transform = `translateX(${deplacement}px) `;
 
         const newGradient = activeItem.getAttribute('data-color');
-        if(newGradient){
+        if (newGradient) {
             container.style.background = newGradient;
             container.style.transition = "background 0.4s ease";
         }
-        
+
         const colorTxt = activeItem.getAttribute('cltxt');
         if (colorTxt) {
             container.style.color = colorTxt;
             indicator.style.borderColor = colorTxt;
-            
+
             const allItems = container.querySelectorAll('.value-item');
             allItems.forEach(item => {
                 item.style.color = colorTxt;
@@ -90,17 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             })
-            .then(() => {
-                alert("Données envoyées à la feuille Google !");
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                alert("Erreur lors de l'enregistrement.");
-            })
-            .finally(() => {
-                saveBtn.disabled = false;
-                saveBtn.innerText = "Enregistrer";
-            });
+                .then(() => {
+                    alert("Données envoyées à la feuille Google !");
+                    window.location.href = "https://francoisdebelle.github.io/swimmingPool/";
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert("Erreur lors de l'enregistrement.");
+                })
+                .finally(() => {
+                    saveBtn.disabled = false;
+                    saveBtn.innerText = "Enregistrer";
+                });
+                
         });
     }
 });
@@ -109,6 +111,6 @@ const burger = document.getElementById('burger-menu');
 const navLinks = document.getElementById('nav-links');
 
 burger.addEventListener('click', () => {
-  burger.classList.toggle('open');
-  navLinks.classList.toggle('active');
+    burger.classList.toggle('open');
+    navLinks.classList.toggle('active');
 });
