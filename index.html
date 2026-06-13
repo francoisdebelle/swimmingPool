@@ -32,7 +32,8 @@
             <p>Ma piscine</p>
         </div>
         <div class="meteo">
-            <p>Meteo</p>
+            <div id="meteo"></div>
+            <i id="weather-icon"></i>
         </div>
     </div>
     <div class="huge-icon"><i class="ti ti-pool badge"></i></div>
@@ -96,7 +97,47 @@
         </div>
     </div>
     <script>
-        
+        function ChargerMeteo(){
+            const apiKey = "af5ef4c8c41532ea9cc149e2f0cc37c3";
+            const city = "Tongrinne";
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=fr`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    let temp = data.main.temp.toFixed(0);
+                    const blocAlert = `<p class="meteoText">${temp}°C - ${data.weather[0].description}.</p>`
+                    document.getElementById("meteo").insertAdjacentHTML('beforeend', blocAlert);
+                    const tablerClasses = {
+                        "01d": "ti-sun",
+                        "01n": "ti-moon",
+                        "02d": "ti-cloud-sun",
+                        "02n": "ti-cloud-moon",
+                        "03d": "ti-cloud",
+                        "03n": "ti-cloud",
+                        "04d": "ti-clouds",
+                        "04n": "ti-clouds",
+                        "09d": "ti-cloud-rain",
+                        "09n": "ti-cloud-rain",
+                        "10d": "ti-cloud-sun-rain",
+                        "10n": "ti-cloud-moon-rain",
+                        "11d": "ti-cloud-storm",
+                        "11n": "ti-cloud-storm",
+                        "13d": "ti-snowflake",
+                        "13n": "ti-snowflake",
+                        "50d": "ti-mist",
+                        "50n": "ti-mist"
+                    };
+
+                    // Utilisation dans votre fonction Fetch :
+                    let iconCode = data.weather[0].icon;
+                    let className = tablerClasses[iconCode] || "ti-thermometer";
+
+                    // On applique la classe sur votre balise <i> dans le HTML
+                    document.getElementById("weather-icon").className = `ti ${className}`;
+                })
+                .catch(error => console.error("Erreur :", error));
+        };
         function AjouterAlerte (titre){
             const blocAlert = `<div class="alert-title">${titre}</div>`
             document.getElementById("alert-box").insertAdjacentHTML('beforeend', blocAlert);
@@ -209,6 +250,7 @@
         }
 
         chargerDerniereMesure();
+        ChargerMeteo();
     </script>
 </body>
 
