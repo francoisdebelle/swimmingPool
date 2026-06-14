@@ -106,7 +106,7 @@
                 .then(response => response.json())
                 .then(data => {
                     let temp = data.main.temp.toFixed(0);
-                    const blocAlert = `<p class="meteoText">${temp}°C - ${data.weather[0].description}.</p>`
+                    const blocAlert = `<p class="meteoText">${temp}°C - ${data.weather[0].description}</p>`
                     document.getElementById("meteo").insertAdjacentHTML('beforeend', blocAlert);
                     const tablerClasses = {
                         "01d": "ti-sun",
@@ -115,8 +115,8 @@
                         "02n": "ti-cloud-moon",
                         "03d": "ti-cloud",
                         "03n": "ti-cloud",
-                        "04d": "ti-clouds",
-                        "04n": "ti-clouds",
+                        "04d": "ti-cloud",
+                        "04n": "ti-cloud",
                         "09d": "ti-cloud-rain",
                         "09n": "ti-cloud-rain",
                         "10d": "ti-cloud-sun-rain",
