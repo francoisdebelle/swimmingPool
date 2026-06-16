@@ -17,38 +17,66 @@ body, html {
 }
 
 table{
-    border-radius: 1rem;
+   border-radius: 16px;
     margin-top: 20px;
     width: 85vw;
     align-self: center;
-    border-collapse: collapse;
+    border-spacing: 0; /* Remplacé collapse par spacing 0 */
     overflow: hidden;
     outline: rgb(241, 245, 249) solid 1px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     background-color: #ffffff;
+    border: 1px solid #dde8ff;
 
 }
 
 th, td {
     text-align: center;
-    padding : 9px 8px; 
+    padding : 12px 8px;
+}
+
+tr {
+    position: relative;
+}
+
+/* 2. On crée la ligne continue sous chaque rangée (sauf la tête du tableau) */
+tbody tr::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 3%;      /* Début de la ligne à 3% du bord gauche du tableau */
+    width: 94%;    /* Elle s'étend sur 94% (laissant 3% de vide de chaque côté) */
+    height: 1px;   /* Épaisseur fine */
+    background-color: #dde8ff; /* Couleur de séparation */
+}
+
+/* 3. On masque la ligne sous la toute dernière mesure pour ne pas doubler le contour du tableau */
+tbody tr:last-child::after {
+    display: none;
 }
 
 thead{
     background-color: #2979f2;
     color: #fff;
     font-weight: 300;
-    letter-spacing: -0.03rem;
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: normal;
+}
+
+th{
+    font-weight: 400;
 }
 
 h2{
-    margin-left: 20px;
-    margin-top: 80px;
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    line-height: 1.5;
-    font-weight: 400;
-    font-display: swap;
+    font-size: 11px;
+    font-weight: 500;
+    color: #8097c0;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+        margin-bottom: 2px;
+    margin-top: 100px;
+    margin-left: 11px;
 }
 
 .loading{
@@ -170,9 +198,5 @@ tr.selectionnee .delete-btn { display: inline; }
     display: flex;
     align-items: center;
     color: #fff;
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    line-height: 0;
-    font-weight: 400;
-    font-display: swap;
+    font-weight: 500;
 }
