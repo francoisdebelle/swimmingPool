@@ -63,12 +63,12 @@
         </div>
         <div>
             <h2>RECOMMENDATION</h2>
-            <div class="alert-card">
-                <div class="logo-box" style="background-color: #d0f5d8 ;"><i class="ti ti-circle-check"
+            <div class="alert-card" id="alert-card">
+                <div class="logo-box" id="logo-box" style="background-color: #d0f5d8 ;"><i id="alert-icon" class="ti ti-circle-check"
                         style="color:#1a7f37 ; font-size: 19px;"></i></div>
                 <div id="alert-box">
-                    <div class="alert-title" id="alert-title" style="display: none;">pH trop élevé</div>
-                    <div class="alert-text" style="display: none;">Ajouter ce que vous voulez. De tout de façon ça ne changera rien</div>
+                    <div class="alert-title" id="alert-title">Tout va bien !</div>
+                    <div class="alert-text">Profitez ! Il n'y a rien à faire.</div>
                 </div>
             </div>
         </div>
@@ -97,7 +97,25 @@
         </div>
     </div>
     <script>
-        function ChargerMeteo(){
+        function NettoyerAlertes() {
+            const alertBox = document.getElementById("alert-box");
+
+            if (document.getElementById("alert-title")) {
+                alertBox.innerHTML = "";
+                const Box1 = document.getElementById("alert-card");
+                Box1.style.backgroundColor = "#fff8ed";
+                Box1.style.border = "1px solid #fcd297";
+                document.getElementById("logo-box").style.backgroundColor = "#fde9b8";
+
+                const iconEl = document.getElementById("alert-icon");
+                iconEl.className = "ti ti-flask";
+                iconEl.style.color = "#c07800";
+
+            }
+        }
+
+
+        function ChargerMeteo() {
             const apiKey = "af5ef4c8c41532ea9cc149e2f0cc37c3";
             const city = "Tongrinne";
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=fr`;
@@ -138,18 +156,19 @@
                 })
                 .catch(error => console.error("Erreur :", error));
         };
-        function AjouterAlerte (titre){
+        function AjouterAlerte(titre) {
+            NettoyerAlertes();
             const blocAlert = `<div class="alert-title">${titre}</div>`
             document.getElementById("alert-box").insertAdjacentHTML('beforeend', blocAlert);
 
         }
 
-        function AjouterTextAlerte (text){
+        function AjouterTextAlerte(text) {
             const blocAlert = `<div class="alert-text">${text}</div>`
             document.getElementById("alert-box").insertAdjacentHTML('beforeend', blocAlert);
 
         }
-        
+
         async function chargerDerniereMesure() {
 
             const url = "https://script.google.com/macros/s/AKfycbzjf-IBRqf-Kt6YNoonyonIXVvGPEW2RyVkeaqbS65WnJKbfP9zXTMUEgha96B-QVVc/exec";
@@ -199,50 +218,50 @@
                 document.getElementById("date-mesure").textContent =
                     "Dernière mesure · " + texteDate;
 
-                switch (derniereMesure.chlore){
-                    case '0': 
+                switch (derniereMesure.chlore) {
+                    case '0':
                         AjouterAlerte("Le niveau de chlore est trop bas.");
                         AjouterTextAlerte("Rajouter 100 grammes de chlore solide.");
                         break;
-                    case '0.5': 
+                    case '0.5':
                         AjouterAlerte("Le niveau de chlore est trop bas.");
                         AjouterTextAlerte("Rajouter 20 grammes de chlore solide.");
                         break;
-                    case '3': 
+                    case '3':
                         AjouterAlerte("Le niveau de chlore est trop haut.");
                         AjouterTextAlerte("Il faut attendre que le niveau de chlore descende naturelement.");
                         break;
-                    case '5': 
+                    case '5':
                         AjouterAlerte("Le niveau de chlore est trop haut.");
                         AjouterTextAlerte("Il faut attendre que le niveau de chlore descende naturelement.");
                         break;
-                    case '10': 
+                    case '10':
                         AjouterAlerte("Le niveau de chlore est trop haut.");
                         AjouterTextAlerte("Il faut attendre que le niveau de chlore descende naturelement.");
                         break;
-                    
+
                 }
 
-                switch (derniereMesure.ph){
-                    case '6,2': 
+                switch (derniereMesure.ph) {
+                    case '6,2':
                         AjouterAlerte("Le pH de l'eau est trop bas.");
                         AjouterTextAlerte("Ajouter 720 mL de pH Maxi.");
                         break;
-                    case '6,8': 
+                    case '6,8':
                         AjouterAlerte("Le pH de l'eau est trop bas.");
                         AjouterTextAlerte("Ajouter 240 mL de pH Maxi.");
                         break;
-                    case '7,8': 
+                    case '7,8':
                         AjouterAlerte("Le pH de l'eau est trop haut.");
                         AjouterTextAlerte("Ajouter 300 grammes de pH Mini.");
                         break;
-                    case '8,4': 
+                    case '8,4':
                         AjouterAlerte("Le pH de l'eau est trop haut.");
                         AjouterTextAlerte("Ajouter 1,8 kilo de pH Mini.");
                         break;
-                    
+
                 }
-                
+
 
             } catch (error) {
                 console.error("Erreur :", error);
