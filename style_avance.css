@@ -88,6 +88,11 @@ h3{
     color: #1a2a4a;
 }
 
+.bw-button:hover{
+    background-color: #F0F5FF;
+    cursor: pointer;
+}
+
 .main-container{
     display: flex;
     flex-direction: column;
@@ -127,19 +132,101 @@ h3{
     color: #8a9ec0;
 }
 
-.date-picker{
-    background: #f3f6fc;
-    border: 0.5px solid rgba(90, 106, 138, 0.18);
-    border-radius: 10px;
-    padding: 8px 12px;
-    font-size: 13px;
-    color: #1a2a4a;
+.date-picker {
+  background: #f3f6fc;
+  border: 0.5px solid rgba(90, 106, 138, 0.18);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #1a2a4a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: Lato;
+  width: 95%;
+  margin-top: 6px;
+  cursor: pointer;
+  position: relative;
+}
+
+.date-picker input[type="date"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.temp-hero{
+    color: #2979f2;
+    font-size: 28px;
+    font-family: 'DM Serif Display', serif;
+    margin-right: 6px;
+    margin-left: 15px;
+
+}
+
+.unit{
+    color: #5a6a8a;
+    font-size: 14px;
+}
+
+.temp-slider{
+    margin-top: 6px;
+    width:95%;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+  outline: none;
+}
+
+/* Thumb - Chrome, Safari, Edge */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #aaa;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+/* Thumb - Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #aaa;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+input[type="range"].styled {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  background: linear-gradient(to right, #2979f2 0%, #2979f2 60%, #ddd 60%, #ddd 100%);
+}
+
+.max-min-temp{
     display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: space-around;
-    font-family: lato;
-    width: 95%;
+    justify-content: space-between;
+    color: #5a6a8a;
+    font-size: 12px;
+    margin-top: 6px;
+    margin-bottom: 3px;
 }
 
 .navbar {

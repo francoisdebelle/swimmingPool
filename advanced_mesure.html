@@ -79,7 +79,7 @@
                 <i class="ti ti-plus"></i>
                 Ajouter un backwash
             </div>
-            
+
         </div>
         <h2>Température de l'eau</h2>
         <div class="card">
@@ -88,8 +88,21 @@
                 Relevé thermique
             </div>
             <h3>Date de mesure</h3>
-            <input type="date" class="date-picker"/>
+            <div class="date-picker" onclick="document.getElementById('myDate').showPicker()">
+                <i class="ti ti-calendar" style="font-size: 15px; color: #8a9ec0;"></i>
+                <span id="dateDisplay">12 juin 2026</span>
+                <input type="date" id="myDate" value="2026-06-12">
+            </div>
             <h3>Température</h3>
+            <div>
+                <span class="temp-hero">24</span>
+                <span class="unit">°C</span>
+            </div>
+            <input class="temp-slider" type="range" min="10" max="40" step="1" />
+            <div class="max-min-temp">
+                <span>10°</span>
+                <span>40°</span>
+            </div>
         </div>
         <h2>mesure chimique</h2>
 
@@ -102,6 +115,42 @@
         burger.addEventListener('click', () => {
             burger.classList.toggle('open');
             navLinks.classList.toggle('active');
+        });
+
+        function updateTrack(input) {
+            const val = (input.value - input.min) / (input.max - input.min) * 100;
+            input.style.background = `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${val}%, #ddd ${val}%, #ddd 100%)`;
+            document.querySelector('.temp-hero').textContent = input.value;
+        }
+
+        const range = document.querySelector('input[type="range"]');
+        range.addEventListener('input', () => updateTrack(range));
+        updateTrack(range); // initialisation
+
+        
+
+        const input = document.getElementById('myDate');
+        const display = document.getElementById('dateDisplay');
+
+        const today = new Date();
+
+        // Formate en YYYY-MM-DD pour la valeur de l'input
+        input.value = today.toISOString().split('T')[0];
+
+        // Affiche en français
+        display.textContent = today.toLocaleDateString('fr-FR', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+
+        input.addEventListener('change', () => {
+            const date = new Date(input.value + 'T00:00:00');
+            display.textContent = date.toLocaleDateString('fr-FR', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
         });
     </script>
 </body>
