@@ -296,22 +296,21 @@ input[type="range"].styled {
     background-color: #fff;
     border-radius: 2px;
     transition: transform 0.3s ease, opacity 0.3s ease;
-    transform-origin: left center;
+    transform-origin: center center;
 }
 
 .menu-burger.open span:nth-child(1) {
-    transform: rotate(45deg) translate(0px, 0px);
+    transform: translateY(9.5px) rotate(45deg);
 }
 
 .menu-burger.open span:nth-child(2) {
     opacity: 0;
-    transform: translateX(-10px);
+    transform: scaleX(0);
 }
 
 .menu-burger.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(0px, 0px);
+    transform: translateY(-9.5px) rotate(-45deg);
 }
-
 .logo-box {
     color: #fff;
     margin: 17px; 
