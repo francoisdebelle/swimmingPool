@@ -60,6 +60,10 @@ div{
     font-size: 13px;
 }
 
+img{
+    width: 370px;
+}
+
 .huge-icon{
     color: #fff;
     background: #2979f2;
